@@ -1,13 +1,21 @@
+import NuxtConfiguration from '@nuxt/config'
+
 import colors from 'vuetify/es5/util/colors'
 
-export default {
+const API_URL = process.env.API_URL || 'http://localhost:3005'
+
+const env = { API_URL }
+
+const title = 'ミニ四駆'
+
+const nuxtConfig: NuxtConfiguration = {
   mode: 'universal',
   /*
   ** Headers of the page
   */
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -29,13 +37,11 @@ export default {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
   /*
   ** Nuxt.js modules
   */
@@ -49,8 +55,8 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {
-  },
+  axios: {},
+  env,
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
@@ -77,3 +83,5 @@ export default {
     }
   }
 }
+
+export default nuxtConfig
