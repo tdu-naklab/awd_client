@@ -10,6 +10,8 @@ const title = 'ミニ四駆'
 
 const nuxtConfig: NuxtConfiguration = {
   mode: 'universal',
+  srcDir: 'src/',
+  env,
   /*
   ** Headers of the page
   */
@@ -56,7 +58,6 @@ const nuxtConfig: NuxtConfiguration = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
-  env,
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
