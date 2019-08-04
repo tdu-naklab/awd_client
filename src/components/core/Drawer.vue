@@ -43,9 +43,9 @@
         text: 'User'
       },
       {
-        to: '/article/special',
-        icon: 'mdi-message-bulleted',
-        text: 'Special'
+        to: '/racing',
+        icon: 'mdi-car',
+        text: 'レース画面'
       },
       {
         to: '/article/movie',

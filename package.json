@@ -19,6 +19,7 @@
     "@nuxtjs/vuetify": "0.5.5",
     "lodash": "^4.17.15",
     "nuxt": "^2.8.1",
+    "particles.js": "^2.0.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3",
     "vue-property-decorator": "^8.2.1",
