@@ -17,3 +17,7 @@ export const initDefaultMember = (): Member => {
     barcode: null
   }
 }
+
+export type RankingMember = Member & {
+  time: string | null
+}

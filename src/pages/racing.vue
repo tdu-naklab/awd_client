@@ -2,14 +2,14 @@
   <v-content class="main-wrapper">
     <v-container fluid class="main-container">
       <v-layout align-space-around justify-space-around row fill-height>
-        <v-flex xs4>
-          aaa
+        <v-flex xs2>
+          <course-detail :course-num="1" course-color="red" />
         </v-flex>
-        <v-flex xs4>
-          bbb
+        <v-flex xs8>
+          <ranking />
         </v-flex>
-        <v-flex xs4>
-          ccc
+        <v-flex xs2>
+          <course-detail :course-num="2" course-color="blue" />
         </v-flex>
       </v-layout>
     </v-container>
@@ -22,10 +22,12 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import RacingBackground from '~/components/RacingBackground.vue'
+  import CourseDetail from '~/components/racing/CourseDetail.vue'
+  import Ranking from '~/components/racing/Ranking.vue'
 
   @Component({
     layout: 'empty',
-    components: { RacingBackground },
+    components: { Ranking, CourseDetail, RacingBackground },
 
     mounted(): void {
     }

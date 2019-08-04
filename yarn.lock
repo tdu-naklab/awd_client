@@ -8401,6 +8401,11 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
+vue2-filters@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/vue2-filters/-/vue2-filters-0.7.0.tgz#76ca2b92531bd1e8a79be7afb3551aa270f103ea"
+  integrity sha512-T6d+CN8oJuRY/hlOALI+iptFmTuqNPVL5cMU56cLho487WySOxVUfKa3FqRS2aF4Pt4RgSwSN8WlN3GF07aTkw==
+
 vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"

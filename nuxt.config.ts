@@ -45,6 +45,7 @@ const nuxtConfig: NuxtConfiguration = {
   */
   plugins: [
     '~/plugins/vuetify',
+    '~/plugins/vue2-filters'
   ],
   /*
   ** Nuxt.js modules

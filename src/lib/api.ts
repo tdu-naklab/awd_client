@@ -1,6 +1,6 @@
 // import axios from 'axios'
 import range from 'lodash/range'
-import { Member } from '~/lib/model'
+import { Member, RankingMember } from '~/lib/model'
 
 // const BASE_URL = process.env.API_URL
 
@@ -30,6 +30,28 @@ export const updateMember = async (member: Member): Promise<null> => {
 export const deleteMember = async (member: Member): Promise<null> => {
   // axious request
   return null
+}
+
+// eslint-disable-next-line require-await
+export const courseDetail = async (courseNum: number): Promise<Array<RankingMember>> => {
+  return range(3).map((it): RankingMember => <RankingMember>({
+    id: it,
+    name: `ユーザー名 ${it}`,
+    machine_name: `機体名 ${it}`,
+    barcode: 114514,
+    time: '12:345'
+  }))
+}
+
+// eslint-disable-next-line require-await
+export const getRanking = async (): Promise<Array<RankingMember>> => {
+  return range(10).map((it): RankingMember => <RankingMember>({
+    id: it,
+    name: `ユーザー名 ${it}`,
+    machine_name: `機体名 ${it}`,
+    barcode: 114514,
+    time: '12:345'
+  }))
 }
 
 /**
