@@ -38,9 +38,9 @@
 
     links = [
       {
-        to: '/article/news',
-        icon: 'mdi-newspaper',
-        text: 'News'
+        to: '/user',
+        icon: 'mdi-account',
+        text: 'User'
       },
       {
         to: '/article/special',

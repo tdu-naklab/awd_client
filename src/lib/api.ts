@@ -5,13 +5,31 @@ import { Member } from '~/lib/model'
 // const BASE_URL = process.env.API_URL
 
 // eslint-disable-next-line require-await
-export const getMemberList = async (): Promise<any> => {
+export const getMemberList = async (): Promise<Array<Member>> => {
   return range(10).map((it): Member => <Member>({
     id: it,
     name: `ユーザー名 ${it}`,
     machine_name: `機体名 ${it}`,
     barcode: 114514
   }))
+}
+
+// eslint-disable-next-line require-await,@typescript-eslint/no-unused-vars
+export const postMember = async (member: Member): Promise<null> => {
+  // axious request
+  return null
+}
+
+// eslint-disable-next-line require-await,@typescript-eslint/no-unused-vars
+export const updateMember = async (member: Member): Promise<null> => {
+  // axious request
+  return null
+}
+
+// eslint-disable-next-line require-await,@typescript-eslint/no-unused-vars
+export const deleteMember = async (member: Member): Promise<null> => {
+  // axious request
+  return null
 }
 
 /**

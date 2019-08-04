@@ -43,12 +43,13 @@ const nuxtConfig: NuxtConfiguration = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    '~/plugins/vuetify',
+  ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module'
@@ -58,21 +59,6 @@ const nuxtConfig: NuxtConfiguration = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
-  /*
-  ** vuetify module configuration
-  ** https://github.com/nuxt-community/vuetify-module
-  */
-  vuetify: {
-    theme: {
-      primary: colors.blue.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
-    }
-  },
   /*
   ** Build configuration
   */

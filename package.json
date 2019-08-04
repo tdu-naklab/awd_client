@@ -13,6 +13,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@mdi/font": "^3.8.95",
     "@nuxt/typescript": "^2.8.1",
     "@nuxtjs/axios": "^5.5.4",
     "@nuxtjs/vuetify": "0.5.5",

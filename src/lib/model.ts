@@ -8,3 +8,12 @@ export type Member = {
 
   barcode: number | null
 }
+
+export const initDefaultMember = (): Member => {
+  return {
+    id: null,
+    name: null,
+    machine_name: null,
+    barcode: null
+  }
+}
