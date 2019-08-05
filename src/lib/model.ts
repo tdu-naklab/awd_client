@@ -42,5 +42,13 @@ export type Race = {
   id: number | null
   course: number | null
   status: number
-  users: Array<RankingMember> | null
+  users: Array<RaceMember> | null
+}
+
+export type RaceMember = {
+  id: number | null
+  name: string | null
+  // eslint-disable-next-line camelcase
+  machine_name: string | null
+  raptime: number | null
 }

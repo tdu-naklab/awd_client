@@ -3,13 +3,13 @@
     <v-container fluid class="main-container">
       <v-layout align-space-around justify-space-around row fill-height>
         <v-flex xs3 class="lane-1">
-          <course-detail :course-num="1" course-color="red" :race-data="course[0]" />
+          <course-detail :course-num="1" course-color="red" :race-data="course1" />
         </v-flex>
         <v-flex xs5>
           <ranking-component :contents="ranking" />
         </v-flex>
         <v-flex xs3 class="lane-2">
-          <course-detail :course-num="2" course-color="blue" :race-data="course[1]" />
+          <course-detail :course-num="2" course-color="blue" :race-data="course2" />
         </v-flex>
       </v-layout>
     </v-container>
@@ -26,7 +26,7 @@
   import CourseDetail from '~/components/racing/CourseDetail.vue'
   import RankingComponent from '~/components/racing/RankingComponent.vue'
   import * as api from '@/lib/api'
-  import { Race, Ranking, RankingMember } from '~/lib/model'
+  import { Race, RankingMember } from '~/lib/model'
 
   @Component({
     layout: 'empty',
@@ -35,7 +35,8 @@
   export default class RacingPage extends Vue {
     socket!: SocketIOClient.Socket
 
-    course: Array<Race> = []
+    course1: Race | null = null
+    course2: Race | null = null
 
     ranking: Array<RankingMember> = []
 
@@ -70,7 +71,7 @@
       })
 
       this.socket.on('race_finished', ({ course, lane }) => {
-        console.log('race_started:', course, lane)
+        console.log('race_finished:', course, lane)
         // this.loadRace(id)
       })
 
@@ -84,11 +85,17 @@
 
     async loadRace(raceId: number) {
       const race = await api.getRaceDetail(raceId)
+      console.log('race', race)
       if (race === null || race.course === null) {
+        console.log('race is null')
         return
       }
 
-      this.course[race.course - 1] = race
+      if (race.course === 1) {
+        this.course1 = race
+      } else {
+        this.course2 = race
+      }
     }
 
     async loadRanking() {
@@ -103,7 +110,10 @@
     width: 100%;
 
     .main-container {
-      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 114;
     }
 

@@ -7,16 +7,23 @@
           <span class="number display-4 sub-title">{{ courseNum }}</span>
         </p>
       </div>
-            <div v-for="(member, index) in userList" :key="member.id">
-<!--      <div v-for="(member, index) in contents" :key="member.id" class="user-content">-->
+      <div v-for="(member, index) in userList" :key="member.id">
         <v-layout align-end justify-center row fill-height>
-          <v-flex xs2 class="grey-text no-text">No.{{ index + 1 }}</v-flex>
+          <v-flex xs2 class="grey-text no-text">
+            No.{{ index + 1 }}
+          </v-flex>
           <v-flex xs8 column>
-            <div class="grey-text display-2">{{ member.name }}</div>
-            <div class="machine-name">{{ member.machine_name }}</div>
+            <div class="grey-text display-2">
+              {{ member.name }}
+            </div>
+            <div class="machine-name">
+              {{ member.machine_name }}
+            </div>
           </v-flex>
         </v-layout>
-        <div class="grey-text time-score display-3">{{ member.raptime | formatMillsec }}</div>
+        <div class="grey-text time-score display-3">
+          {{ member.raptime | formatMillsec }}
+        </div>
       </div>
     </v-content>
   </v-layout>
@@ -24,8 +31,7 @@
 
 <script lang="ts">
   import { Component, Vue, Prop } from 'vue-property-decorator'
-  import { Race, RankingMember } from '~/lib/model'
-  import * as api from '@/lib/api'
+  import { Race } from '~/lib/model'
 
   @Component({
     components: {},
@@ -54,16 +60,6 @@
       }
 
       return this.raceData.users
-    }
-
-    contents: Array<RankingMember> = []
-
-    async mounted() {
-      // await this.loadContents()
-    }
-
-    async loadContents() {
-      this.contents = await api.courseDetail(this.courseNum)
     }
 
     public get circuitColorStyle() {
