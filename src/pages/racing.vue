@@ -60,19 +60,41 @@
         // タイムが確定したとき
         console.log('race_end:', id)
         this.loadRace(id)
-
-        // TODO: ランキングの更新
         this.loadRanking()
       })
 
       this.socket.on('race_started', ({ course, lane }) => {
         console.log('race_started:', course, lane)
-        // this.loadRace()
+        let race: Race | null = null
+        if (course === 1) {
+          race = this.course1
+        } else {
+          race = this.course2
+        }
+
+        if (race === null) {
+          return
+        }
+
+        race.users![lane - 1].raceStartTime = (new Date()).getTime()
+        race.users!.splice(lane - 1, 1, race.users![lane - 1])
       })
 
       this.socket.on('race_finished', ({ course, lane }) => {
         console.log('race_finished:', course, lane)
-        // this.loadRace(id)
+        let race: Race | null = null
+        if (course === 1) {
+          race = this.course1
+        } else {
+          race = this.course2
+        }
+
+        if (race === null) {
+          return
+        }
+
+        race.users![lane - 1].raceStartTime = null
+        race.users!.splice(lane - 1, 1, race.users![lane - 1])
       })
 
       this.loadContent()

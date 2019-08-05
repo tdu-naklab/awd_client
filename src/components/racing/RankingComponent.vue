@@ -45,9 +45,12 @@
 
     filters: {
       formatMillsec(value: number) {
-        const sec = Math.floor(value / 1000)
-        const millisec = value - (sec * 1000)
-        return `${sec}:${millisec}`
+        if (value === null) {
+          return '--.---'
+        }
+        const sec = ('00' + Math.floor(value / 1000)).slice(-2)
+        const millisec = ('000' + Math.floor(value - (Math.floor(value / 1000) * 1000))).slice(-3)
+        return `${sec}.${millisec}`
       }
     }
   })

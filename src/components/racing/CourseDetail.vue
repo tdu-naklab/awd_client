@@ -31,7 +31,7 @@
 
 <script lang="ts">
   import { Component, Vue, Prop } from 'vue-property-decorator'
-  import { Race } from '~/lib/model'
+  import { Race, RaceMember } from '~/lib/model'
 
   @Component({
     components: {},
@@ -39,11 +39,11 @@
     filters: {
       formatMillsec(value: number | null) {
         if (value === null) {
-          return '--:---'
+          return '--.---'
         }
-        const sec = Math.floor(value / 1000)
-        const millisec = Math.floor(value - (sec * 1000))
-        return `${sec}:${millisec}`
+        const sec = ('00' + Math.floor(value / 1000)).slice(-2)
+        const millisec = ('000' + Math.floor(value - (Math.floor(value / 1000) * 1000))).slice(-3)
+        return `${sec}.${millisec}`
       }
     }
   })
@@ -53,6 +53,25 @@
     @Prop({ default: 'red' }) readonly courseColor!: string
 
     @Prop({ default: null }) readonly raceData: Race | null = null
+
+    timer: number = -1
+
+    mounted() {
+      const timer: any = setInterval(() => {
+        if (this.raceData !== null && this.raceData.users !== null) {
+          this.raceData.users.forEach((value: RaceMember) => {
+            if (value.raceStartTime) {
+              value.raptime = (new Date()).getTime() - value.raceStartTime
+            }
+          })
+        }
+      }, 50)
+      this.timer = timer
+    }
+
+    destroyed() {
+      clearInterval(this.timer)
+    }
 
     get userList() {
       if (this.raceData === null || this.raceData.users === null) {

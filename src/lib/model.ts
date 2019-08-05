@@ -51,4 +51,5 @@ export type RaceMember = {
   // eslint-disable-next-line camelcase
   machine_name: string | null
   raptime: number | null
+  raceStartTime: number | null
 }
