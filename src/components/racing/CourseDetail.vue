@@ -7,8 +7,8 @@
           <span class="number display-4 sub-title">{{ courseNum }}</span>
         </p>
       </div>
-      <!--      <div v-for="(member, index) in userList" :key="member.id">-->
-      <div v-for="(member, index) in contents" :key="member.id" class="user-content">
+            <div v-for="(member, index) in userList" :key="member.id">
+<!--      <div v-for="(member, index) in contents" :key="member.id" class="user-content">-->
         <v-layout align-end justify-center row fill-height>
           <v-flex xs2 class="grey-text no-text">No.{{ index + 1 }}</v-flex>
           <v-flex xs8 column>
@@ -31,9 +31,12 @@
     components: {},
 
     filters: {
-      formatMillsec(value: number) {
+      formatMillsec(value: number | null) {
+        if (value === null) {
+          return '--:---'
+        }
         const sec = Math.floor(value / 1000)
-        const millisec = value - (sec * 1000)
+        const millisec = Math.floor(value - (sec * 1000))
         return `${sec}:${millisec}`
       }
     }
@@ -56,7 +59,7 @@
     contents: Array<RankingMember> = []
 
     async mounted() {
-      await this.loadContents()
+      // await this.loadContents()
     }
 
     async loadContents() {

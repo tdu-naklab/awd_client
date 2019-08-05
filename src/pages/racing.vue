@@ -3,13 +3,13 @@
     <v-container fluid class="main-container">
       <v-layout align-space-around justify-space-around row fill-height>
         <v-flex xs3 class="lane-1">
-          <course-detail :course-num="1" course-color="red" :race-data="lane[0]" />
+          <course-detail :course-num="1" course-color="red" :race-data="course[0]" />
         </v-flex>
         <v-flex xs5>
-          <ranking-component />
+          <ranking-component :contents="ranking" />
         </v-flex>
         <v-flex xs3 class="lane-2">
-          <course-detail :course-num="2" course-color="blue" :race-data="lane[1]" />
+          <course-detail :course-num="2" course-color="blue" :race-data="course[1]" />
         </v-flex>
       </v-layout>
     </v-container>
@@ -26,7 +26,7 @@
   import CourseDetail from '~/components/racing/CourseDetail.vue'
   import RankingComponent from '~/components/racing/RankingComponent.vue'
   import * as api from '@/lib/api'
-  import { Race, Ranking } from '~/lib/model'
+  import { Race, Ranking, RankingMember } from '~/lib/model'
 
   @Component({
     layout: 'empty',
@@ -35,9 +35,9 @@
   export default class RacingPage extends Vue {
     socket!: SocketIOClient.Socket
 
-    ranking: Ranking | null = null
+    course: Array<Race> = []
 
-    lane: Array<Race> = []
+    ranking: Array<RankingMember> = []
 
     mounted() {
       if (process.server) {
@@ -56,8 +56,12 @@
       })
 
       this.socket.on('race_end', (id) => {
+        // タイムが確定したとき
         console.log('race_end:', id)
         this.loadRace(id)
+
+        // TODO: ランキングの更新
+        this.loadRanking()
       })
 
       this.socket.on('race_started', ({ course, lane }) => {
@@ -71,6 +75,7 @@
       })
 
       this.loadContent()
+      this.loadRanking()
     }
 
     async loadContent() {
@@ -83,7 +88,11 @@
         return
       }
 
-      this.lane[race.course - 1] = race
+      this.course[race.course - 1] = race
+    }
+
+    async loadRanking() {
+      this.ranking = await api.getRanking()
     }
   }
 </script>

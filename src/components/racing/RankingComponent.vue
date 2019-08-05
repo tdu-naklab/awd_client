@@ -6,7 +6,7 @@
           <span class="display-4 ranking-title">- RANKING -</span>
         </p>
       </div>
-      <v-layout v-for="(member, index) in contents" :key="member.id" row class="user">
+      <v-layout v-for="(member, index) in getContents" :key="member.id" row class="user">
         <v-flex xs2>
           <v-layout align-center justify-center row fill-height>
             <v-flex class="display-3 grey-text">
@@ -37,9 +37,8 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator'
+  import { Component, Vue, Prop } from 'vue-property-decorator'
   import { RankingMember } from '~/lib/model'
-  import * as api from '@/lib/api'
 
   @Component({
     components: {},
@@ -53,14 +52,14 @@
     }
   })
   export default class RankingComponent extends Vue {
-    contents: Array<RankingMember> = []
+    @Prop({ default: null }) readonly contents!: Array<RankingMember>
 
-    async mounted() {
-      await this.loadContents()
-    }
-
-    async loadContents() {
-      this.contents = await api.getRanking()
+    get getContents() {
+      if (this.contents === null) {
+        return []
+      } else {
+        return this.contents
+      }
     }
   }
 </script>

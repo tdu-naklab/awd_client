@@ -29,17 +29,6 @@ export const deleteMember = async (member: Member): Promise<null> => {
   return null
 }
 
-// eslint-disable-next-line require-await
-export const courseDetail = async (courseNum: number): Promise<Array<RankingMember>> => {
-  return range(3).map((it): RankingMember => <RankingMember>({
-    id: it,
-    name: `ユーザー名 ${it}`,
-    machine_name: `機体名 ${it}`,
-    barcode: 114514,
-    raptime: 12432
-  }))
-}
-
 export const getRaceList = async (): Promise<Array<Race>> => {
   const { data } = await axios.get(`${API_URL}/races`)
   return data
@@ -52,13 +41,8 @@ export const getRaceDetail = async (raceId: number): Promise<Race> => {
 
 // eslint-disable-next-line require-await
 export const getRanking = async (): Promise<Array<RankingMember>> => {
-  return range(9).map((it): RankingMember => <RankingMember>({
-    id: it,
-    name: `ユーザー名 ${it}`,
-    machine_name: `機体名 ${it}`,
-    barcode: 114514,
-    raptime: 12342
-  }))
+  const { data } = await axios.get(`${API_URL}/races/ranking`)
+  return data
 }
 
 /**

@@ -18,8 +18,17 @@ export const initDefaultMember = (): Member => {
   }
 }
 
-export type RankingMember = Member & {
+export type RankingMember = {
+  id: number | null
+  name: string | null
+  // eslint-disable-next-line camelcase
+  machine_name: string | null
+  barcode: string | null
   raptime: number | null
+  // eslint-disable-next-line camelcase
+  user_id: number
+  // eslint-disable-next-line camelcase
+  race_id: number
 }
 
 export type Ranking = {
