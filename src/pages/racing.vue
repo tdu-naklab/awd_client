@@ -2,14 +2,14 @@
   <v-content class="main-wrapper">
     <v-container fluid class="main-container">
       <v-layout align-space-around justify-space-around row fill-height>
-        <v-flex xs2>
-          <course-detail :course-num="1" course-color="red" />
+        <v-flex xs3 class="lane-1">
+          <course-detail :course-num="1" course-color="red" :race-data="lane[0]" />
         </v-flex>
-        <v-flex xs8>
-          <ranking />
+        <v-flex xs5>
+          <ranking-component />
         </v-flex>
-        <v-flex xs2>
-          <course-detail :course-num="2" course-color="blue" />
+        <v-flex xs3 class="lane-2">
+          <course-detail :course-num="2" course-color="blue" :race-data="lane[1]" />
         </v-flex>
       </v-layout>
     </v-container>
@@ -24,14 +24,20 @@
   import io from 'socket.io-client'
   import RacingBackground from '~/components/RacingBackground.vue'
   import CourseDetail from '~/components/racing/CourseDetail.vue'
-  import Ranking from '~/components/racing/Ranking.vue'
+  import RankingComponent from '~/components/racing/RankingComponent.vue'
+  import * as api from '@/lib/api'
+  import { Race, Ranking } from '~/lib/model'
 
   @Component({
     layout: 'empty',
-    components: { Ranking, CourseDetail, RacingBackground }
+    components: { RankingComponent, CourseDetail, RacingBackground }
   })
   export default class RacingPage extends Vue {
     socket!: SocketIOClient.Socket
+
+    ranking: Ranking | null = null
+
+    lane: Array<Race> = []
 
     mounted() {
       if (process.server) {
@@ -43,9 +49,41 @@
       this.socket.on('connection', () => {
         console.log('connection')
       })
-      this.socket.on('message', (msg) => {
-        console.log('recieved message:', msg)
+
+      this.socket.on('race_registered', (id) => {
+        console.log('race_registered:', id)
+        this.loadRace(id)
       })
+
+      this.socket.on('race_end', (id) => {
+        console.log('race_end:', id)
+        this.loadRace(id)
+      })
+
+      this.socket.on('race_started', ({ course, lane }) => {
+        console.log('race_started:', course, lane)
+        // this.loadRace()
+      })
+
+      this.socket.on('race_finished', ({ course, lane }) => {
+        console.log('race_started:', course, lane)
+        // this.loadRace(id)
+      })
+
+      this.loadContent()
+    }
+
+    async loadContent() {
+      // this.ranking = await api.getRaceList()
+    }
+
+    async loadRace(raceId: number) {
+      const race = await api.getRaceDetail(raceId)
+      if (race === null || race.course === null) {
+        return
+      }
+
+      this.lane[race.course - 1] = race
     }
   }
 </script>
@@ -70,5 +108,23 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  .ranking-title {
+    color: #FAFAFA;
+  }
+
+  .lane-1 {
+    padding-right 48px;
+    border-right-style: solid;
+    border-right-color: #FAFAFA;
+    border-right-width: 2px;
+  }
+
+  .lane-2 {
+    padding-left: 48px;
+    border-left-style: solid;
+    border-left-color: #FAFAFA;
+    border-left-width: 2px;
   }
 </style>

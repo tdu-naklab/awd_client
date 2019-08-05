@@ -3,29 +3,31 @@
     <v-content>
       <div class="ranking-title">
         <p class="text-center">
-          <span class="display-4">- RANKING -</span>
+          <span class="display-4 ranking-title">- RANKING -</span>
         </p>
       </div>
       <v-layout v-for="(member, index) in contents" :key="member.id" row class="user">
-        <v-flex xs3>
+        <v-flex xs2>
           <v-layout align-center justify-center row fill-height>
-            <v-flex class="display-3">
+            <v-flex class="display-3 grey-text">
               {{ index + 1 | ordinal({ includeNumber: true }) }}
             </v-flex>
           </v-layout>
         </v-flex>
-        <v-flex xs6>
+        <v-flex xs8>
           <v-layout column>
-            <div class="display-2">
+            <div class="display-2 grey-text">
               {{ member.name }}
             </div>
-            <div>{{ member.machine_name }}</div>
+            <div class="machine-name">
+              {{ member.machine_name }}
+            </div>
           </v-layout>
         </v-flex>
-        <v-flex xs3>
-          <v-layout align-center justify-center row fill-height>
+        <v-flex xs2>
+          <v-layout align-center justify-center row fill-height class="grey-text">
             <v-flex class="display-3">
-              {{ member.time }}
+              {{ member.raptime | formatMillsec }}
             </v-flex>
           </v-layout>
         </v-flex>
@@ -40,9 +42,17 @@
   import * as api from '@/lib/api'
 
   @Component({
-    components: {}
+    components: {},
+
+    filters: {
+      formatMillsec(value: number) {
+        const sec = Math.floor(value / 1000)
+        const millisec = value - (sec * 1000)
+        return `${sec}:${millisec}`
+      }
+    }
   })
-  export default class Ranking extends Vue {
+  export default class RankingComponent extends Vue {
     contents: Array<RankingMember> = []
 
     async mounted() {
@@ -62,5 +72,17 @@
 
   .user {
     padding-top 16px;
+  }
+
+  .grey-text {
+    color: #EEEEEE;
+  }
+
+  .machine-name {
+    color: #BDBDBD;
+  }
+
+  .ranking-title {
+    color: #FAFAFA;
   }
 </style>

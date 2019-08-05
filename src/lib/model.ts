@@ -19,5 +19,19 @@ export const initDefaultMember = (): Member => {
 }
 
 export type RankingMember = Member & {
-  time: string | null
+  raptime: number | null
+}
+
+export type Ranking = {
+  id: number | null
+  course: number | null
+  status: number
+  users: Array<RankingMember> | null
+}
+
+export type Race = {
+  id: number | null
+  course: number | null
+  status: number
+  users: Array<RankingMember> | null
 }

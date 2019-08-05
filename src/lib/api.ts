@@ -1,6 +1,7 @@
+import axios from 'axios'
 import range from 'lodash/range'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Member, RankingMember } from '~/lib/model'
+import { Member, Race, Ranking, RankingMember } from '~/lib/model'
 
 const API_URL = process.env.API_URL
 
@@ -35,18 +36,28 @@ export const courseDetail = async (courseNum: number): Promise<Array<RankingMemb
     name: `ユーザー名 ${it}`,
     machine_name: `機体名 ${it}`,
     barcode: 114514,
-    time: '12:345'
+    raptime: 12432
   }))
+}
+
+export const getRaceList = async (): Promise<Array<Race>> => {
+  const { data } = await axios.get(`${API_URL}/races`)
+  return data
+}
+
+export const getRaceDetail = async (raceId: number): Promise<Race> => {
+  const { data } = await axios.get(`${API_URL}/races/${raceId}`)
+  return data
 }
 
 // eslint-disable-next-line require-await
 export const getRanking = async (): Promise<Array<RankingMember>> => {
-  return range(10).map((it): RankingMember => <RankingMember>({
+  return range(9).map((it): RankingMember => <RankingMember>({
     id: it,
     name: `ユーザー名 ${it}`,
     machine_name: `機体名 ${it}`,
     barcode: 114514,
-    time: '12:345'
+    raptime: 12342
   }))
 }
 
