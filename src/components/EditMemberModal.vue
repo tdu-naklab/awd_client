@@ -14,13 +14,17 @@
       </v-toolbar-items>
     </v-toolbar>
     <v-card-text>
-      <v-form>
+      <v-form
+        ref="form"
+        lazy-validation
+      >
         <v-layout>
           <v-text-field
             v-model="content.name"
             name="name"
             label="Name"
             type="text"
+            required
           ></v-text-field>
         </v-layout>
         <v-layout>
@@ -29,14 +33,18 @@
             name="machine_name"
             label="machine_name"
             type="text"
+            required
           ></v-text-field>
         </v-layout>
         <v-layout>
           <v-text-field
             v-model="content.barcode"
             name="barcode"
-            label="machine_name"
-            type="number"
+            label="barcode"
+            type="text"
+            required
+            :counter="6"
+            :rules="barcodeRules"
           ></v-text-field>
         </v-layout>
         <v-card-actions>
@@ -64,6 +72,11 @@
     @Prop(Boolean)
     newContent!: boolean
 
+    barcodeRules = [
+      v => !!v || 'barcode is required',
+      v => (v && v.length === 6) || 'barcode must be 6 characters'
+    ]
+
     @Emit('closeThisModal')
     closeThisModal() {
       console.log('close this modal')
@@ -75,9 +88,9 @@
 
       try {
         if (this.newContent) {
-          await api.postMember(param)
+          await api.postMember(this.$axios, param)
         } else {
-          await api.updateMember(param)
+          await api.updateMember(this.$axios, param)
         }
         //     message = this.resultMessage(result)
         //     this.visibleParentSnackBar(result, message)

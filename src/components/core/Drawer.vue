@@ -46,21 +46,6 @@
         to: '/racing',
         icon: 'mdi-car',
         text: 'レース画面'
-      },
-      {
-        to: '/article/movie',
-        icon: 'mdi-movie',
-        text: 'Movie'
-      },
-      {
-        to: '/onair',
-        icon: 'mdi-video',
-        text: 'ONAIR'
-      },
-      {
-        to: '/book',
-        icon: 'mdi-book-open',
-        text: 'Book'
       }
     ]
   }

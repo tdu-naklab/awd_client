@@ -10,7 +10,7 @@
               <v-dialog v-model="editDialog" persistent max-width="500">
                 <template v-slot:activator="{ on }">
                   <v-btn color="primary" v-on="on" @click="isNewContent = true">
-                    記事を追加
+                    ユーザを追加
                   </v-btn>
                 </template>
                 <edit-member-modal
@@ -61,9 +61,9 @@
   @Component({
     components: { EditMemberModal },
 
-    async asyncData() {
+    async asyncData({ $axios }) {
       return {
-        userList: await api.getMemberList()
+        userList: await api.getMemberList($axios)
       }
     }
   })
@@ -118,7 +118,7 @@
     }
 
     async loadContents() {
-      this.userList = await api.getMemberList()
+      this.userList = await api.getMemberList(this.$axios)
     }
   }
 </script>

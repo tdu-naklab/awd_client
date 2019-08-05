@@ -2,16 +2,20 @@ import NuxtConfiguration from '@nuxt/config'
 
 import colors from 'vuetify/es5/util/colors'
 
-const API_URL = process.env.API_URL || 'http://localhost:3005'
+const API_URL = process.env.API_URL || 'http://localhost:3000'
 
 const env = { API_URL }
 
 const title = 'ミニ四駆'
 
 const nuxtConfig: NuxtConfiguration = {
-  mode: 'universal',
+  mode: 'spa',
   srcDir: 'src/',
   env,
+  server: {
+    port: 3001,
+    host: '0.0.0.0'
+  },
   /*
   ** Headers of the page
   */
@@ -59,7 +63,9 @@ const nuxtConfig: NuxtConfiguration = {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+  },
+
   /*
   ** Build configuration
   */

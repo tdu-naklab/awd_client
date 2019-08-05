@@ -21,18 +21,32 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
+  import io from 'socket.io-client'
   import RacingBackground from '~/components/RacingBackground.vue'
   import CourseDetail from '~/components/racing/CourseDetail.vue'
   import Ranking from '~/components/racing/Ranking.vue'
 
   @Component({
     layout: 'empty',
-    components: { Ranking, CourseDetail, RacingBackground },
-
-    mounted(): void {
-    }
+    components: { Ranking, CourseDetail, RacingBackground }
   })
   export default class RacingPage extends Vue {
+    socket!: SocketIOClient.Socket
+
+    mounted() {
+      if (process.server) {
+        return
+      }
+
+      const API_URL: string = process.env.API_URL || '/'
+      this.socket = io.connect(API_URL)
+      this.socket.on('connection', () => {
+        console.log('connection')
+      })
+      this.socket.on('message', (msg) => {
+        console.log('recieved message:', msg)
+      })
+    }
   }
 </script>
 
