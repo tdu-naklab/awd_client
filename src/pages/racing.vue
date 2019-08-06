@@ -3,13 +3,13 @@
     <v-container fluid class="main-container">
       <v-layout align-space-around justify-space-around row fill-height>
         <v-flex xs3 class="lane-1">
-          <course-detail :course-num="1" course-color="red" :race-data="course1" />
+          <course-detail :course-num="2" course-color="red" :race-data="course2" />
         </v-flex>
         <v-flex xs5>
           <ranking-component :contents="ranking" />
         </v-flex>
         <v-flex xs3 class="lane-2">
-          <course-detail :course-num="2" course-color="blue" :race-data="course2" />
+          <course-detail :course-num="1" course-color="blue" :race-data="course1" />
         </v-flex>
       </v-layout>
     </v-container>
