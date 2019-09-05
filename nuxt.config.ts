@@ -2,16 +2,20 @@ import NuxtConfiguration from '@nuxt/config'
 
 import colors from 'vuetify/es5/util/colors'
 
-const API_URL = process.env.API_URL || 'http://localhost:3005'
+const API_URL = process.env.API_URL || 'http://localhost:3000'
 
 const env = { API_URL }
 
 const title = 'ミニ四駆'
 
 const nuxtConfig: NuxtConfiguration = {
-  mode: 'universal',
+  mode: 'spa',
   srcDir: 'src/',
   env,
+  server: {
+    port: 3001,
+    host: '0.0.0.0'
+  },
   /*
   ** Headers of the page
   */
@@ -43,12 +47,14 @@ const nuxtConfig: NuxtConfiguration = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    '~/plugins/vuetify',
+    '~/plugins/vue2-filters'
+  ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module'
@@ -57,22 +63,9 @@ const nuxtConfig: NuxtConfiguration = {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
-  /*
-  ** vuetify module configuration
-  ** https://github.com/nuxt-community/vuetify-module
-  */
-  vuetify: {
-    theme: {
-      primary: colors.blue.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
-    }
+  axios: {
   },
+
   /*
   ** Build configuration
   */

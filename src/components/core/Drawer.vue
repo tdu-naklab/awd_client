@@ -38,29 +38,14 @@
 
     links = [
       {
-        to: '/article/news',
-        icon: 'mdi-newspaper',
-        text: 'News'
+        to: '/user',
+        icon: 'mdi-account',
+        text: 'User'
       },
       {
-        to: '/article/special',
-        icon: 'mdi-message-bulleted',
-        text: 'Special'
-      },
-      {
-        to: '/article/movie',
-        icon: 'mdi-movie',
-        text: 'Movie'
-      },
-      {
-        to: '/onair',
-        icon: 'mdi-video',
-        text: 'ONAIR'
-      },
-      {
-        to: '/book',
-        icon: 'mdi-book-open',
-        text: 'Book'
+        to: '/racing',
+        icon: 'mdi-car',
+        text: 'レース画面'
       }
     ]
   }
