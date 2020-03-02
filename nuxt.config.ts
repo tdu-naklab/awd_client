@@ -13,7 +13,7 @@ const nuxtConfig: NuxtConfiguration = {
   srcDir: 'src/',
   env,
   server: {
-    port: 3001,
+    port: 3002,
     host: '0.0.0.0'
   },
   /*
